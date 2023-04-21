@@ -10,25 +10,38 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
-@Table(name="categories")
+@Table(name="products")
 @Setter
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Category extends BaseEntity{
+public class Product {
 
     @Id
-    @Column(name="id")
-    private String categoryId;
+    private String productId;
 
-    @Column(name="category_title",length = 60,nullable = false)
+
     private String title;
 
-    @Column(name="category_description",length = 570,nullable = false)
+    @Column(length = 10000)
     private String description;
 
-    private String coverImage;
+    private int price;
+
+    private int discountedPrice;
+
+    private int quantity;
+
+    private Date addedDate;
+
+    private boolean live;
+
+    private boolean stock;
+
+
+
 
 }

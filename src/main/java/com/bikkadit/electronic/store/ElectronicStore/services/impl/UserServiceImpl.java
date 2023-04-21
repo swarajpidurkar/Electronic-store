@@ -4,6 +4,7 @@ import com.bikkadit.electronic.store.ElectronicStore.dtos.PageableResponse;
 import com.bikkadit.electronic.store.ElectronicStore.dtos.UserDto;
 import com.bikkadit.electronic.store.ElectronicStore.entities.User;
 import com.bikkadit.electronic.store.ElectronicStore.exceptions.ResourceNotFoundException;
+import com.bikkadit.electronic.store.ElectronicStore.helper.AppConstants;
 import com.bikkadit.electronic.store.ElectronicStore.helper.Helper;
 import com.bikkadit.electronic.store.ElectronicStore.repositories.UserRepository;
 import com.bikkadit.electronic.store.ElectronicStore.services.UserService;
@@ -49,12 +50,13 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
         log.info("initiating the dao call for the save user data");
 
-        // generate unique id in string format
+        // generate unique id in long format
         String UserId = UUID.randomUUID().toString();
         userDto.setUserId(UserId);
 
         // dtoToEntity
         User user=dtoToEntity(userDto);
+        user.setIsActive(AppConstants.YES);
         User savedUser=userRepository.save(user);
 
         // entityToDto

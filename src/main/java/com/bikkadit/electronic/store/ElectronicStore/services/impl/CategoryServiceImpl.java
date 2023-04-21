@@ -5,6 +5,7 @@ import com.bikkadit.electronic.store.ElectronicStore.dtos.PageableResponse;
 import com.bikkadit.electronic.store.ElectronicStore.dtos.UserDto;
 import com.bikkadit.electronic.store.ElectronicStore.entities.Category;
 import com.bikkadit.electronic.store.ElectronicStore.exceptions.ResourceNotFoundException;
+import com.bikkadit.electronic.store.ElectronicStore.helper.AppConstants;
 import com.bikkadit.electronic.store.ElectronicStore.helper.Helper;
 import com.bikkadit.electronic.store.ElectronicStore.repositories.CategoryRepository;
 import com.bikkadit.electronic.store.ElectronicStore.services.CategoryService;
@@ -37,6 +38,7 @@ public class CategoryServiceImpl implements CategoryService {
         String categoryId = UUID.randomUUID().toString();
         categoryDto.setCategoryId(categoryId);
         Category category = modelMapper.map(categoryDto, Category.class);
+        category.setIsActive(AppConstants.YES);
         Category savedCategory = categoryRepository.save(category);
         log.info("Completed the dao call to save the category");
         return modelMapper.map(savedCategory,CategoryDto.class);
